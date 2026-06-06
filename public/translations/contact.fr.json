@@ -1,0 +1,22 @@
+{
+  "hero": {
+    "primary": "Parlons de votre projet.",
+    "secondary": "Décrivez-nous votre besoin, nous vous rappelons rapidement avec un premier conseil et un devis gratuit."
+  },
+  "projets": {
+    "defaut": "Autre",
+    "labels": [
+    { "option": "Installation neuve" },
+    { "option": "Rénovation / mise aux normes" },
+    { "option": "Dépannage" },
+    { "option": "Domotique" },
+    { "option": "Vidéosurveillance" },
+    { "option": "Climatisation" },
+    { "option": "Borne de recharge" },
+    { "option": "Autre" }
+    ]
+  },
+  "formulaire": { "champ": "* champ obligatoire", "identite": "prénom nom *", "telephone": "votre numéro de téléphone",
+    "email": "votre email *", "projet": "type de projet", "message": "votre message *",
+    "bouton": "Envoyer la demande", "confidentialite": "Vos données restent confidentielles et ne sont utilisées que pour traiter votre demande." }
+}

@@ -1,44 +1,74 @@
-export default function Footer() {
-  const year = new Date().getFullYear()
+// fichier src/components/site/Footer.tsx
+//import { Link } from "@tanstack/react-router";
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Zap } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
+// imports de la logique de traduction
+import { usePageTranslations } from "@/hooks/usePageTranslations";
+import type { FooterTranslations } from "@/types/translations";
+
+// import des constantes d'environnement
+import {siteConfig} from "@/config/site";
+
+const currentYear = new Date().getFullYear();
+
+export function Footer() {
+  const { lang } = useLanguage();
+  // Chargement asynchrone typé manuellement
+  const { data: t, isLoading, error } = usePageTranslations<FooterTranslations>("footer", lang);
+  if (isLoading) return <p className="text-center py-10 animate-pulse" aria-live="polite">Chargement du contenu de Footer...</p>;
+  if (error || !t) return <p className="text-center py-10 text-destructive" role="alert">
+  {error instanceof Error ? error.message : "Impossible de charger les textes."}</p>	
+	
   return (
-    <footer className="mt-20 border-t border-[var(--line)] px-4 pb-14 pt-10 text-[var(--sea-ink-soft)]">
-      <div className="page-wrap flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-        <p className="m-0 text-sm">
-          &copy; {year} Your name here. All rights reserved.
-        </p>
-        <p className="island-kicker m-0">Built with TanStack Start</p>
+    <footer className="">
+	  <section className="container-narrow bg-foreground text-background dark:bg-background dark:text-foreground">
+      <div className="border border-black grid py-2 md:grid-cols-4 items-start">
+  
+      {/* zone Entreprise */}
+      <div className="md:col-span-2 flex flex-col">
+        <div className="flex items-center gap-2 font-bold">
+        <span className="grid h-9 w-9 place-items-center rounded-full bg-accent text-accent-foreground">
+          <Zap className="h-4 w-4" />
+        </span>
+        {siteConfig.entreprise}<span className="text-sm font-normal">siret {siteConfig.siret}</span>
+        </div>
+        <p className="pl-2 max-w-sm text-sm text-background">{t.primary}</p>
+        <div className="flex gap-2">
+          <a href={`${siteConfig.facebookLink}`} aria-label="Facebook" target="_blank" rel="noopener noreferrer" className="grid h-9 w-9 place-items-center rounded-full bg-background/10 hover:bg-accent hover:text-accent-foreground transition-colors"><Facebook className="h-4 w-4" /></a>
+          <a href={`${siteConfig.instagramLink}`} aria-label="Instagram" target="_blank" rel="noopener noreferrer" className="grid h-9 w-9 place-items-center rounded-full bg-background/10 hover:bg-accent hover:text-accent-foreground transition-colors"><Instagram className="h-4 w-4" /></a>
+          <a href={`${siteConfig.linkedinLink}`} aria-label="Linkedin" target="_blank" rel="noopener noreferrer" className="grid h-9 w-9 place-items-center rounded-full bg-background/10 hover:bg-accent hover:text-accent-foreground transition-colors"><Linkedin className="h-4 w-4" /></a>
+        </div>
       </div>
-      <div className="mt-4 flex justify-center gap-4">
-        <a
-          href="https://x.com/tan_stack"
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-xl p-2 text-[var(--sea-ink-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)]"
-        >
-          <span className="sr-only">Follow TanStack on X</span>
-          <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32">
-            <path
-              fill="currentColor"
-              d="M12.6 1h2.2L10 6.48 15.64 15h-4.41L7.78 9.82 3.23 15H1l5.14-5.84L.72 1h4.52l3.12 4.73L12.6 1zm-.77 12.67h1.22L4.57 2.26H3.26l8.57 11.41z"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://github.com/TanStack"
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-xl p-2 text-[var(--sea-ink-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)]"
-        >
-          <span className="sr-only">Go to TanStack GitHub</span>
-          <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32">
-            <path
-              fill="currentColor"
-              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-            />
-          </svg>
-        </a>
+     
+      {/* zone Contact */}
+  {/* L'ajout de pt-2 permet de simuler la hauteur du logo de gauche pour aligner le titre du contact */}
+      <div className="md:col-span-2 md:justify-self-end flex flex-col gap-2 pt-2 pr-2">
+        <h4 className="text-sm font-semibold uppercase tracking-wider text-background/80">{t.contact}</h4>
+        <ul className="flex flex-col gap-3 text-sm text-background/80">
+          <li className="flex gap-2 items-center">
+            <Mail aria-hidden="true" className="h-4 w-4 text-accent shrink-0" />
+            <a href={`mailto:${siteConfig.email}`} className="hover:text-accent hover:underline transition-colors">{siteConfig.email}</a>
+          </li>
+          <li className="flex gap-2 items-center">
+            <MapPin aria-hidden="true" className="h-4 w-4 text-accent shrink-0" />
+            <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.adresse)}`} target="_blank" rel="noopener noreferrer" className="hover:text-accent hover:underline transition-colors">{siteConfig.adresse}</a>
+          </li>
+        </ul>
       </div>
+
+      </div>
+
+      {/* zone références légales */}
+	    {/*<div className="border-t border-black mb-3"/>*/}
+      <div className="mt-2 border border-black flex flex-col items-center justify-between gap-3 py-2 text-xs text-background/60 md:flex-row">
+        <div className="pl-2">© {currentYear} {siteConfig.entreprise} — {t.ref.droits}</div>
+        <div className="flex items-center gap-4 pr-2">
+          <a href={t.ref.mentionsUrl} className="hover:text-accent" target="_blank" rel="noopener noreferrer">{t.ref.mentions}</a>
+          <a href={t.ref.confidentialiteUrl} className="hover:text-accent" target="_blank" rel="noopener noreferrer">{t.ref.confidentialite}</a>
+        </div>
+      </div>
+    </section>
     </footer>
-  )
+  );
 }

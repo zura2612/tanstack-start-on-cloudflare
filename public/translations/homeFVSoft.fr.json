@@ -1,0 +1,73 @@
+{
+  "hero": {
+    "primaryBefore": "Votre développeur web de ",
+    "primaryAccent": "confiance",
+    "primaryAfter": " et sur-mesure.",
+    "secondary": "Une application métier à concevoir, un site vitrine à moderniser ou une architecture cloud à déployer ? {entreprise} concrétise vos projets numériques avec des solutions performantes, sécurisées et évolutives.",
+    "photo": "workspace.jpg"
+  },
+
+  "trustbar": {
+    "items": [
+      { "iconKey": "CodeXml", "label": "Architecture TypeScript & React" },
+      { "iconKey": "CloudLightning", "label": "Déploiement Serverless Edge" },
+      { "iconKey": "Clock", "label": "Développement agile et soigné" }
+    ]
+  },
+ 
+  "pourquoi": {
+    "title": "Pourquoi nous choisir ?",
+    "primary": "Pilotez votre activité avec des outils numériques performants.",
+    "secondary": "Une application web lente ou un outil interne obsolète freine votre croissance et complique le quotidien de vos équipes. Nous intervenons pour moderniser, sécuriser et fluidifier vos infrastructures numériques.",
+    "cartes": [
+      { "iconKey": "Layers", "title": "Applications obsolètes", "text": "Architectures lourdes, code difficile à maintenir ou bugs répétitifs. Nous auditons, modernisons et optimisons vos plateformes." },
+      { "iconKey": "ShieldCheck", "title": "Sécurité & Robustesse", "text": "Fuites de données, API vulnérables ou pannes de serveurs. Nous concevons des backends étanches et sécurisés aux normes actuelles." },
+      { "iconKey": "Lightbulb", "title": "Projets innovants", "text": "Applications métiers (SaaS), Single Page Applications (SPA), automatisation ou API sur-mesure. Nous développons des solutions pensées pour durer." }
+    ]
+  },
+
+  "processus": {
+    "title": "Notre processus",
+    "primary": "Simple, agile, sans surprise.",
+    "cartes": [
+      { "num": "01", "title": "Cadrage gratuit", "text": "Échange approfondi pour analyser vos besoins techniques et objectifs fonctionnels." },
+      { "num": "02", "title": "Chiffrage transparent", "text": "Un devis clair, détaillé (spécifications, délais) et sans engagement, envoyé sous 48 heures." },
+      { "num": "03", "title": "Livraison continue", "text": "Développement itératif, tests rigoureux et déploiement fluide sur des infrastructures cloud modernes." }
+    ]
+   },
+
+  "realisations": {
+    "title": "Nos réalisations",
+    "primary": "Des projets qui parlent pour nous.",
+    "cartes": [
+      { "srcKey": "realisation_1.jpg", "title": "Application Métier (SPA)", "location": "Plateforme SaaS en React & Vite" },
+      { "srcKey": "realisation_2.jpg", "title": "API & Architecture Serverless", "location": "Backend Edge sur Cloudflare Workers" },
+      { "srcKey": "realisation_3.jpg", "title": "Refonte Digitale Totale", "location": "Site vitrine haute performance et optimisé SEO" }
+    ]
+  },
+
+  "temoignages": {
+    "title": "Témoignages",
+    "primary": "Ils nous ont fait confiance.",
+    "cartes": [
+     { "name": "Mathias Ostanel", "date": "janvier 2024", "text": "Refonte complète de notre outil interne de gestion effectuée en fonction de nos besoins réels. Code propre et transition transparente." },
+     { "name": "Elysa Thomas", "date": "janvier 2024", "text": "Une réactivité et une écoute hors pair. Développeur à la fois technique et pédagogue, livraison rapide et très efficace." },
+     { "name": "Julie Martet", "date": "mars 2024", "text": "Ingénieur informatique réactif et très professionnel. L'architecture Cloudflare mise en place est d'une rapidité incroyable. Je recommande." },
+     { "name": "Clara Navail", "date": "décembre 2024", "text": "Super développeur full-stack ! Travail rigoureux, esprit d'initiative fort, livraison dans les délais. Tout était parfait." },
+     { "name": "Jean Corentin", "date": "mai 2025", "text": "Un vrai professionnel ! Assure un excellent suivi technique et reste disponible pour la maintenance. Très bon développeur, infrastructure nickel." },
+     { "name": "Ivoa Bille", "date": "octobre 2025", "text": "Probablement le meilleur ingénieur logiciel avec qui nous avons collaboré. Très organisé, prévenant, d'excellent conseil sur les choix d'architecture." }
+    ]
+  },
+
+  "faq": {
+    "title": "FAQ",
+    "primary": "Vos questions, nos réponses.",
+    "secondary": "Vous avez un doute sur une technologie ou un besoin spécifique ? Contactez-nous, nous prendrons le temps d'étudier votre architecture.",
+    "questions": [
+      { "question": "Proposez-vous des prestations de maintenance ?", "answer": "Oui, nous proposons des contrats de maintenance applicative (corrective et évolutive) pour garantir le suivi, la sécurité et les mises à jour de vos outils." },
+      { "question": "Le devis et l'étude technique sont-ils gratuits ?", "answer": "Absolument. Nous étudions gratuitement votre cahier des charges et vos besoins pour vous remettre une proposition commerciale détaillée sous 48 heures, sans engagement." },
+      { "question": "Quelles technologies utilisez-vous principalement ?", "answer": "Nous sommes spécialisés dans les écosystèmes modernes et performants : TypeScript, React, Vite pour le front-end, et les architectures serverless ultra-rapides (Cloudflare Workers, Hono) pour le backend." },
+      { "question": "Les applications développées m'appartiennent-elles ?", "answer": "Oui, à la livraison et après règlement, la propriété intellectuelle et l'intégralité du code source vous sont transférées. Vous êtes propriétaire à 100 %." }
+    ]
+  }
+}

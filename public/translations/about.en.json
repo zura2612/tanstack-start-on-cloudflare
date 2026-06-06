@@ -1,0 +1,24 @@
+{
+  "hero": {
+    "primary": "Electricity, a trusted trade.",
+    "secondary": "{entreprise} is above all the story of a passionate craftsman dedicated to his trade, rooted in his region, and determined to offer every client the best quality-to-price ratio."
+  },
+  "histoire": {
+    "primary": "Our Story",
+    "secondary": "Founded in January 2024 by Rémy Fernandez, an electrician with over 10 years of experience, {entreprise} has grown alongside its projects and the trust of its clients. Today, the company is recognized throughout Lot-et-Garonne for the quality of its work. We believe that a good electrical installation is barely visible, but felt every day: comfort, peace of mind, controlled bills. That's what we offer every client.",
+    "cartes": [
+      { "iconKey": "ShieldCheck", "title": "Safety First", "text": "No compromises on compliance and material quality." },
+      { "iconKey": "Heart", "title": "Quality Craftsmanship", "text": "Attention to detail, from neatly arranged cables to a flawless panel." },
+      { "iconKey": "Users", "title": "Human Connection", "text": "A craftsman who listens, advises, and remains reachable after the job is done." },
+      { "iconKey": "CheckCircle2", "title": "Local Commitment", "text": "We support suppliers and artisans in Lot-et-Garonne." }
+    ]
+  },
+  "metriques": {
+    "cartes": [
+      { "valeur": "10+", "title": "years of experience" },
+      { "valeur": "50+", "title": "clients assisted" },
+      { "valeur": "98%", "title": "clients who recommend us" },
+      { "valeur": "48h", "title": "average quote turnaround" }
+    ]
+  }
+}

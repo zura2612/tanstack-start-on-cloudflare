@@ -1,38 +1,36 @@
+// fichier src/components/ThemeToggle.tsx
 import { useEffect, useState } from 'react'
+import { Sun, Moon } from 'lucide-react'
 
-type ThemeMode = 'light' | 'dark' | 'auto'
+type ThemeMode = 'light' | 'dark'
 
 function getInitialMode(): ThemeMode {
   if (typeof window === 'undefined') {
-    return 'auto'
+    return 'light'
   }
 
+// Si l'utilisateur est déjà venu et a choisi un thème, on le reprend
   const stored = window.localStorage.getItem('theme')
-  if (stored === 'light' || stored === 'dark' || stored === 'auto') {
+  if (stored === 'light' || stored === 'dark' ) {
     return stored
   }
 
-  return 'auto'
+  // S'il n'y a pas d'historique, on regarde la préférence du système (Windows/Mac/Linux)
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  return prefersDark ? 'dark' : 'light'
 }
 
 function applyThemeMode(mode: ThemeMode) {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-  const resolved = mode === 'auto' ? (prefersDark ? 'dark' : 'light') : mode
-
+  if (typeof window === 'undefined') return
   document.documentElement.classList.remove('light', 'dark')
-  document.documentElement.classList.add(resolved)
-
-  if (mode === 'auto') {
-    document.documentElement.removeAttribute('data-theme')
-  } else {
-    document.documentElement.setAttribute('data-theme', mode)
-  }
-
-  document.documentElement.style.colorScheme = resolved
+  document.documentElement.classList.add(mode)
+  document.documentElement.setAttribute('data-theme', mode)
+  document.documentElement.style.colorScheme = mode
 }
 
-export default function ThemeToggle() {
-  const [mode, setMode] = useState<ThemeMode>('auto')
+export function ThemeToggle() {
+  // On initialise avec une valeur temporaire safe pour le SSR
+  const [mode, setMode] = useState<ThemeMode>('light')
 
   useEffect(() => {
     const initialMode = getInitialMode()
@@ -40,42 +38,34 @@ export default function ThemeToggle() {
     applyThemeMode(initialMode)
   }, [])
 
-  useEffect(() => {
-    if (mode !== 'auto') {
-      return
-    }
-
-    const media = window.matchMedia('(prefers-color-scheme: dark)')
-    const onChange = () => applyThemeMode('auto')
-
-    media.addEventListener('change', onChange)
-    return () => {
-      media.removeEventListener('change', onChange)
-    }
-  }, [mode])
-
+  
   function toggleMode() {
-    const nextMode: ThemeMode =
-      mode === 'light' ? 'dark' : mode === 'dark' ? 'auto' : 'light'
+    const nextMode: ThemeMode = mode === 'light' ? 'dark' : 'light'
     setMode(nextMode)
     applyThemeMode(nextMode)
     window.localStorage.setItem('theme', nextMode)
   }
 
-  const label =
-    mode === 'auto'
-      ? 'Theme mode: auto (system). Click to switch to light mode.'
-      : `Theme mode: ${mode}. Click to switch mode.`
-
+  const label = `Passer au thème ${mode === 'light' ? 'sombre' : 'clair'}`
   return (
     <button
       type="button"
       onClick={toggleMode}
       aria-label={label}
       title={label}
-      className="rounded-full border border-[var(--chip-line)] bg-[var(--chip-bg)] px-3 py-1.5 text-sm font-semibold text-[var(--sea-ink)] shadow-[0_8px_22px_rgba(30,90,72,0.08)] transition hover:-translate-y-0.5"
+      // "pointer-events-auto" et "isolate" pour garantir la capture du survol
+      className="relative grid h-9 w-9 place-items-center rounded-full bg-card text-foreground
+      shadow-soft transition pointer-events-auto isolate"
     >
-      {mode === 'auto' ? 'Auto' : mode === 'dark' ? 'Dark' : 'Light'}
+      {/* On ajoute "pointer-events-none" sur les icônes pour que la souris traverse l'image 
+        et cible directement le bouton entier */}
+      {/* {mode === 'dark' ? 'Sombre' : 'Clair'} */}
+      {/* Afficher l'icône correspondante avec une taille contrôlée */}
+      {mode === 'dark' ? (
+        <Sun className="h-4 w-4 text-amber-500 pointer-events-none" />
+      ) : (
+        <Moon className="h-4 w-4 text-slate-700 pointer-events-none" />
+      )}
     </button>
   )
 }

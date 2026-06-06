@@ -1,0 +1,74 @@
+{
+  "hero": {
+    "primaryBefore": "Votre électricien de ",
+    "primaryAccent": "confiance",
+    "primaryAfter": " en Lot-et-Garonne.",
+    "secondary": "Une panne soudaine, une mise aux normes urgente, une rénovation à venir ? {entreprise} sécurise votre maison avec des installations professionnelles, fiables et garanties.",
+    "photo": "vehicule.jpg"
+  },
+
+  "trustbar": {
+    "items": [
+      { "iconKey": "Award", "label": "Certifié Qualifelec" },
+      { "iconKey": "ShieldCheck", "label": "Garantie décennale" },
+      { "iconKey": "Clock", "label": "Intervention rapide et soignée" }
+    ]
+  },
+ 
+  "pourquoi": {
+    "title": "Pourquoi nous choisir?",
+    "primary": "Vivre sereinement, sans crainte de la prochaine panne.",
+    "secondary": "Une installation vétuste, c'est plus qu'un désagrément : c'est un risque pour votre famille. Nous intervenons pour rétablir le confort, la sécurité et la conformité de votre logement.",
+    "cartes": [
+      { "iconKey": "PlugZap", "title": "Pannes imprévues", "text": "Coupures, courts-circuits, disjonctions à répétition. Nous diagnostiquons et réparons rapidement." },
+      { "iconKey": "ShieldCheck", "title": "Installations à risque", "text": "Tableaux anciens, prises sans terre, câblage défectueux. Nous remettons votre logement aux normes NF C 15-100." },
+      { "iconKey": "Lightbulb", "title": "Projets en attente", "text": "Rénovation, extension, domotique, bornes de recharge. Nous concevons une installation pensée pour durer." }
+    ]
+  },
+
+  "processus": {
+    "title": "Notre processus",
+    "primary": "Simple, transparent, sans surprise.",
+    "cartes": [
+      { "num": "01", "title": "Diagnostic gratuit", "text": "Visite ou échange téléphonique pour comprendre votre besoin." },
+      { "num": "02", "title": "Devis transparent", "text": "Un chiffrage clair, détaillé et sans engagement, envoyé sous 48 heures." },
+      { "num": "03", "title": "Intervention propre", "text": "Travaux réalisés dans le respect des délais et de votre logement." }
+    ]
+   },
+
+  "realisations": {
+    "title": "Nos réalisations",
+    "primary": "Des chantiers qui parlent pour nous.",
+    "cartes": [
+      { "srcKey": "realisation_1.jpg", "title": "Tableau de distribution électrique", "location": "Maison à Tonneins" },
+      { "srcKey": "realisation_2.jpg", "title": "Éclairage LED", "location": "Maison à Marmande" },
+      { "srcKey": "realisation_3.jpg", "title": "Rénovation totale", "location": "Maison ancienne à Bouglon" }
+    ]
+  },
+
+  "temoignages": {
+    "title": "Témoignages",
+    "primary": "Ils nous ont fait confiance.",
+    "cartes": [
+     { "name": "Mathias Ostanel", "date": "janvier 2024", "text": "Électricité de notre maison en rénovation, faite en fonction de nos besoins, travail très propre." },
+     { "name": "Elysa Thomas", "date": "janvier 2024", "text": "Une réactivité et une disponibilité hors pair, électricien gentil et très professionnel, rapide et efficace." },
+     { "name": "Julie Martet", "date": "mars 2024", "text": "Électricien réactif et professionnel.Le travail est soigné. Je recommande." },
+     { "name": "Clara Navail", "date": "décembre 2024", "text": "Super électricien, travail sérieux, personne sympathique, dépannage rapide!Un jeune qui a envie! Tout était top!" },
+     { "name": "Jean Corentin", "date": "mai 2025", "text": "Remy est un vrai professionnel ! Répond toujours a un appel  après travaux effectués. Très bon électricien, travail propre nickel rien a dire. Je recommande fortement !" },
+     { "name": "Ivoa Bille", "date": "octobre 2025", "text": "Mr Fernandez est probablement le meilleur artisan avec qui nous avons eu la chance de faire appel. Très réactif, organisé, prévenant, de bon conseil, efficace et j’en passe..." }
+    ]
+  },
+
+  "faq": {
+    "title": "Faq",
+    "primary": "Vos questions, nos réponses.",
+    "secondary": "Vous ne trouvez pas votre réponse ? Appelez-nous, nous prendrons toujours le temps pour vous répondre.",
+    "questions": [
+      { "question": "Intervenez-vous dans tout le Lot-et-Garonne ?", "answer": "Non, nous couvrons Casteljaloux, Cocumont, Marmande, Miramont de Guyenne et Tonneins ainsi que les communes limitrophes." },
+      { "question": "Le devis est-il vraiment gratuit ?", "answer": "Absolument. Nous nous déplaçons gratuitement pour évaluer votre projet et vous remettons un devis détaillé sous 48 heures, sans engagement." },
+      { "question": "Êtes-vous disponibles en urgence ?", "answer": "Oui, nous proposons une astreinte pour les pannes critiques (coupure totale, court-circuit, sécurité). Appelez-nous, on s'organise immédiatement." },
+      { "question": "Quelles garanties offrez-vous ?", "answer": "Tous nos travaux sont couverts par notre garantie décennale, ainsi que par les garanties pièces et main-d'œuvre fabricant." }
+    ]
+  }
+
+}

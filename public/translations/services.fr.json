@@ -1,0 +1,24 @@
+{
+  "hero": {
+    "primary": "Une expertise complète, pour chaque besoin.",
+    "secondary": "Du simple dépannage à la rénovation complète, nous mettons tout notre savoir-faire au service de votre confort et de votre sécurité."
+  },
+  "services": {
+    "cartes": [
+      {"iconKey": "Zap", "title": "Installation neuve",
+       "text": "Câblage complet pour neuf, extension ou agrandissement, conforme à la norme NF C 15-100.", "bouton": "Demander un devis gratuit" },
+      {"iconKey": "Wrench", "title": "Rénovation électrique",
+       "text": "Modernisation d'installations anciennes, remplacement de tableau, sécurisation des circuits.", "bouton": "Demander un devis gratuit" },
+      {"iconKey": "PlugZap", "title": "Dépannage 24/7",
+       "text": "Intervention rapide pour panne, court-circuit ou tableau hors service.", "bouton": "Demander un devis gratuit" },
+      {"iconKey": "Home", "title": "Domotique & maison connectée",
+       "text": "Volets, chauffage, alarmes, scénarios automatisés pour une maison plus confortable.", "bouton": "Demander un devis gratuit" },
+      {"iconKey": "Zap", "title": "Vidéosurveillance",
+       "text": "Protégez vos espaces avec un système de vidéosurveillance moderne et accessible à distance.", "bouton": "Demander un devis gratuit" },
+      {"iconKey": "Zap", "title": "Climatisation",
+       "text": "Un air frais en été, une chaleur douce en hiver : optez pour une climatisation efficace.", "bouton": "Demander un devis gratuit" },
+      {"iconKey": "BatteryCharging", "title": "Bornes de recharge",
+       "text": "Alimentez votre voiture électrique avec une borne pratique et adaptée à vos besoins.", "bouton": "Demander un devis gratuit" }
+   ]  
+  }
+}

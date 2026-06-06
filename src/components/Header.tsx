@@ -1,78 +1,160 @@
-import { Link } from '@tanstack/react-router'
-import ThemeToggle from './ThemeToggle'
+// fichier src/components/Header.tsx
+import { Link } from "@tanstack/react-router";
+import { ThemeToggle } from "./ThemeToggle";
+import { Phone, Zap, Menu, X } from "lucide-react";
+import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
-export default function Header() {
+// imports de la logique de traduction
+import { usePageTranslations } from "@/hooks/usePageTranslations";
+import type { HeaderTranslations } from "@/types/translations";
+
+// import des constantes d'environnement
+import {siteConfig} from "@/config/site";
+import {siteStyle}  from "@/config/site";
+
+export function Header() {
+  const [open, setOpen] = useState(false);
+  const { lang } = useLanguage();
+  
+  // Chargement asynchrone typé manuellement
+  const { data: t, isLoading, error } = usePageTranslations<HeaderTranslations>("header", lang);
+  if (isLoading) return <p className="text-center py-10 animate-pulse" aria-live="polite">Chargement du contenu de Header...</p>;
+  if (error || !t) return <p className="text-center py-10 text-destructive" role="alert">
+  {error instanceof Error ? error.message : "Impossible de charger les textes."}</p>
+
+  
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[var(--header-bg)] px-4 backdrop-blur-lg">
-      <nav className="page-wrap flex flex-wrap items-center gap-x-3 gap-y-2 py-3 sm:py-4">
-        <h2 className="m-0 flex-shrink-0 text-base font-semibold tracking-tight">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 rounded-full border border-[var(--chip-line)] bg-[var(--chip-bg)] px-3 py-1.5 text-sm text-[var(--sea-ink)] no-underline shadow-[0_8px_24px_rgba(30,90,72,0.08)] sm:px-4 sm:py-2"
-          >
-            <span className="h-2 w-2 rounded-full bg-[linear-gradient(90deg,#56c6be,#7ed3bf)]" />
-            TanStack Start
-          </Link>
-        </h2>
+    <header className="mb-1 sticky top-0 z-100 bg-background/80 backdrop-blur-md">
+      <div className="border border-black container-narrow flex h-16 items-center justify-between">
 
-        <div className="order-3 flex w-full flex-wrap items-center gap-x-4 gap-y-1 pb-1 text-sm font-semibold sm:order-none sm:w-auto sm:flex-nowrap sm:pb-0">
-          <Link
-            to="/"
-            className="nav-link"
-            activeProps={{ className: 'nav-link is-active' }}
-          >
-            Home
-          </Link>
-          <Link
-            to="/about"
-            className="nav-link"
-            activeProps={{ className: 'nav-link is-active' }}
-          >
-            About
-          </Link>
-          <a
-            href="https://tanstack.com/start/latest/docs/framework/react/overview"
-            className="nav-link"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Docs
-          </a>
-        </div>
+	      {/* logo entreprise */}
+        <Link to="/" className="flex items-center gap-2 font-bold">
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground">
+            <Zap className="h-4 w-4" />
+          </span>
+          <span className="text-base">{siteConfig.entreprise}</span>
+        </Link>
 
-        <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
-          <a
-            href="https://x.com/tan_stack"
-            target="_blank"
-            rel="noreferrer"
-            className="hidden rounded-xl p-2 text-[var(--sea-ink-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)] sm:block"
-          >
-            <span className="sr-only">Follow TanStack on X</span>
-            <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24">
-              <path
-                fill="currentColor"
-                d="M12.6 1h2.2L10 6.48 15.64 15h-4.41L7.78 9.82 3.23 15H1l5.14-5.84L.72 1h4.52l3.12 4.73L12.6 1zm-.77 12.67h1.22L4.57 2.26H3.26l8.57 11.41z"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://github.com/TanStack"
-            target="_blank"
-            rel="noreferrer"
-            className="hidden rounded-xl p-2 text-[var(--sea-ink-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)] sm:block"
-          >
-            <span className="sr-only">Go to TanStack GitHub</span>
-            <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24">
-              <path
-                fill="currentColor"
-                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-              />
-            </svg>
-          </a>
+	     {/* items du menu navigation */}
+       <nav className="hidden items-center gap-1 md:flex">
+          {t.navigation.labels.map((label) => (
+            <Link
+              key={label.to}
+              to={label.to}
+              className="rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition hover:text-foreground"
+              activeOptions={{ exact: true }}
+              activeProps={{ className: "rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground" }}
+            >
+              {label.bouton}
+            </Link>
+          ))}
+        </nav>
 
+	     {/* téléphone formulaire de contact langue */}
+       <div className="hidden items-center gap-3 md:flex">
+          <a href={`tel:${siteConfig.phoneLink}`} className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">
+              <Phone className="h-4 w-4" /> {siteConfig.phoneNumber}
+          </a>
+          <Link
+            to={t.navigation.cta.to}
+            className="inline-flex items-center rounded-full bg-foreground px-4 py-2 text-sm font-semibold text-background transition hover:opacity-90"
+          >{t.navigation.cta.bouton}</Link>
+		  
+          <LanguageSwitcher />
           <ThemeToggle />
         </div>
-      </nav>
+
+       <button
+          aria-label="Menu"
+          className="md:hidden rounded-full p-2 hover:bg-muted"
+          onClick={() => setOpen((o) => !o)}
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </div>
+
+      {/* menu hamburger pour mobile
+      {open && (
+        <div className="border-t border-border bg-background md:hidden">
+          <div className="container-narrow flex flex-col gap-1 py-3">
+            {t.navigation.labels.map((label) => (
+              <Link
+                key={label.to}
+                to={label.to}
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-muted"
+                activeProps={{ className: `${siteStyle.boutonStyle}` }}
+              >{label.bouton}</Link>
+            ))}
+            <a href={`tel:${siteConfig.phoneLink}`} className="mt-2 flex items-center gap-2 rounded-lg px-3 py-2 text-sm">
+              <Phone className="h-4 w-4 text-primary" /> {siteConfig.phoneNumber}
+            </a>
+            <Link
+              to={t.navigation.cta.to}
+              onClick={() => setOpen(false)}
+              className="mt-1 inline-flex items-center justify-center rounded-full bg-foreground px-4 py-2.5 text-sm font-semibold text-background"
+            >{t.navigation.cta.bouton}</Link>
+			
+            <div className="mt-1 flex justify-center"><LanguageSwitcher /></div>
+          </div>
+        </div>
+      )}*/}
+      {/* menu hamburger pour mobile */}
+      {open && (
+        <div className="border-t border-border bg-background md:hidden">
+          <div className="container-narrow flex flex-col gap-1 py-3">
+            
+            {/* Liens de navigation mobiles */}
+            {t.navigation.labels.map((label) => (
+              <Link
+                key={label.to}
+                to={label.to}
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-muted"
+                activeProps={{ className: `${siteStyle.boutonStyle}` }}
+              >
+                {label.bouton}
+              </Link>
+            ))}
+
+            {/* Séparateur visuel discret avant les actions directes */}
+            <hr className="my-2 border-muted" />
+
+            {/* 📱 BLOC TÉLÉPHONE + CTA REGROUPÉS VERTICALEMENT */}
+            {/*<div className="flex flex-col space-y-2 px-3 py-1">*/}
+            {/*<div className="flex flex-col items-start gap-2 px-3 py-1">*/}
+            {/*<div className="grid grid-cols-1 gap-2 px-3 py-2 w-full">*/}
+            <div className="flex flex-col items-start justify-start gap-2 w-full px-3 py-1 text-left">
+            {/* 1. Téléphone */}
+            <a href={`tel:${siteConfig.phoneLink}`} className="flex items-center gap-2 text-sm font-semibold text-primary">
+            <Phone className="h-4 w-4" /> {siteConfig.phoneNumber}
+            </a>
+            {/* 2. Bouton Devis (Placé de force immédiatement en dessous) */}
+            <Link
+            to={t.navigation.cta.to}  onClick={() => setOpen(false)}
+            className="border border-black inline-flex rounded-full bg-foreground px-4 py-2 
+            text-sm font-semibold text-background transition hover:opacity-90 w-fit"
+            >{t.navigation.cta.bouton}</Link>
+            </div>
+
+            {/* 3. Actions utilitaires alignées côte à côte (Langue + Thème) */}
+            <div className="mt-3 flex items-center gap-4 px-3">
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Langue</span>
+                <LanguageSwitcher />
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Affichage</span>
+                <ThemeToggle />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      )}
+
     </header>
   )
 }

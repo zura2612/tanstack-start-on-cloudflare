@@ -1,87 +1,248 @@
-import { createFileRoute } from '@tanstack/react-router'
+// fichier src/routes/index.tsx
+import { createFileRoute } from "@tanstack/react-router";
+import { ArrowRight, Award, Clock, Lightbulb, PlugZap, ShieldCheck, Star } from "lucide-react";
+//CodeXml,CloudLightning,Layers
+import { CtaBand } from "@/components/CtaBand";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-export const Route = createFileRoute('/')({ component: App })
+// Imports de la logique de traduction
+import { usePageTranslations } from "@/hooks/usePageTranslations";
+import type { HomeTranslations } from "@/types/translations";
 
-function App() {
+// import des images
+import imgVehicule from "@/assets/vehicule.jpg";
+import imgRealisation_1 from "@/assets/realisation_1.jpg";
+import imgRealisation_2 from "@/assets/realisation_2.jpg";
+import imgRealisation_3 from "@/assets/realisation_3.jpg";
+
+// import des constantes d'environnement
+import {siteConfig} from "@/config/site";
+import {siteStyle}  from "@/config/site";
+
+//const sectionStyle = "border container-narrow py-5 md:py-10";
+//const texteSectionStyle = "mx-auto max-w-2xl text-center";
+const sectionStyle = "py-5 md:py-10";
+const texteSectionStyle = "text-center";
+
+//export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/') ({
+  head: () => ({
+    meta: [
+	  { title: `${siteConfig.entreprise} - Accueil` },
+    { name: "description", content: siteConfig.headDescriptionHome },
+	  { name: "robots", content: "index, follow" },
+    { name: "canonical", content: siteConfig.urlSite },
+    { property: "og:title", content: `${siteConfig.entreprise} — ${siteConfig.headOgTitle}` },
+    { property: "og:description", content: siteConfig.headDescriptionHome },
+	  { property: "og:type", content: "website" },
+	  { property: "og:url", content: siteConfig.urlSite },
+	  { property: "og:image", content: `${siteConfig.urlSite}/public/vehicule.jpg` },
+	  { property: "og:site_name", content: siteConfig.entreprise },
+    ],
+  }),
+  component: HomePage,
+});
+
+function HomePage() {
+  const { lang } = useLanguage();
+  // Chargement asynchrone typé manuellement
+  const { data: t, isLoading, error } = usePageTranslations<HomeTranslations>("home", lang);
+
+  if (isLoading) return <p className="text-center py-10 animate-pulse" aria-live="polite">Chargement du contenu de HomePage...</p>;
+  if (error || !t) return <p className="text-center py-10 text-destructive" role="alert">
+  {error instanceof Error ? error.message : "Impossible de charger les textes."}</p>;
+  
+  // assurer la cohérence entre les icones des home.xx.json, les icones importées et homeIconMap
+  const homeIconMap: Record<string, React.ElementType> = {
+	Award: Award,
+	Clock: Clock,
+	Lightbulb: Lightbulb,
+	PlugZap: PlugZap,
+	ShieldCheck: ShieldCheck,
+  /*CodeXml: CodeXml,
+  CloudLightning: CloudLightning,
+  Layers: Layers */
+  };
+	
+  // Mapping des clés du JSON vers les images importées
+  const realisationsImages: Record<string, string> = {
+    "realisation_1.jpg": imgRealisation_1,
+    "realisation_2.jpg": imgRealisation_2,
+    "realisation_3.jpg": imgRealisation_3
+  };
+
   return (
-    <main className="page-wrap px-4 pb-8 pt-14">
-      <section className="island-shell rise-in relative overflow-hidden rounded-[2rem] px-6 py-10 sm:px-10 sm:py-14">
-        <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(79,184,178,0.32),transparent_66%)]" />
-        <div className="pointer-events-none absolute -bottom-20 -right-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(47,106,74,0.18),transparent_66%)]" />
-        <p className="island-kicker mb-3">TanStack Start Base Template</p>
-        <h1 className="display-title mb-5 max-w-3xl text-4xl leading-[1.02] font-bold tracking-tight text-[var(--sea-ink)] sm:text-6xl">
-          Start simple, ship quickly.
-        </h1>
-        <p className="mb-8 max-w-2xl text-base text-[var(--sea-ink-soft)] sm:text-lg">
-          This base starter intentionally keeps things light: two routes, clean
-          structure, and the essentials you need to build from scratch.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <a
-            href="/about"
-            className="rounded-full border border-[rgba(50,143,151,0.3)] bg-[rgba(79,184,178,0.14)] px-5 py-2.5 text-sm font-semibold text-[var(--lagoon-deep)] no-underline transition hover:-translate-y-0.5 hover:bg-[rgba(79,184,178,0.24)]"
-          >
-            About This Starter
-          </a>
-          <a
-            href="https://tanstack.com/router"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-[rgba(23,58,64,0.2)] bg-white/50 px-5 py-2.5 text-sm font-semibold text-[var(--sea-ink)] no-underline transition hover:-translate-y-0.5 hover:border-[rgba(23,58,64,0.35)]"
-          >
-            Router Guide
-          </a>
+    <main className="w-full">
+      {/* HERO */}
+      <section className="mb-1 border border-black container-narrow bg-primary text-primary-foreground 
+      dark:bg-primary-background dark:text-primary-background">
+        <div className="grid text-center gap-10 py-2 md:grid-cols-2 md:py-4">
+          <div>
+            <h1 className={`${siteStyle.ligne1SectionBleuStyle}`}>
+				{t.hero.primaryBefore}<span className="text-accent">{t.hero.primaryAccent}</span>{t.hero.primaryAfter}
+            </h1>
+            <div className={`pl-2 ${siteStyle.ligne2SectionBleuStyle}`}>
+              {t.hero.secondary.replace("{entreprise}", siteConfig.entreprise)}
+            </div>
+          </div>
+
+          <div className="relative">
+		    <div className="absolute -inset-4 rounded-[28px] bg-accent/20 blur-2xl"/>
+            <img src={`${imgVehicule}`}  alt="véhicule de l'entreprise" loading="lazy" decoding="async"
+			      className="relative aspect-square w-full rounded-2xl object-cover"/>
+          </div>
         </div>
       </section>
 
-      <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          [
-            'Type-Safe Routing',
-            'Routes and links stay in sync across every page.',
-          ],
-          [
-            'Server Functions',
-            'Call server code from your UI without creating API boilerplate.',
-          ],
-          [
-            'Streaming by Default',
-            'Ship progressively rendered responses for faster experiences.',
-          ],
-          [
-            'Tailwind Native',
-            'Design quickly with utility-first styling and reusable tokens.',
-          ],
-        ].map(([title, desc], index) => (
-          <article
-            key={title}
-            className="island-shell feature-card rise-in rounded-2xl p-5"
-            style={{ animationDelay: `${index * 90 + 80}ms` }}
-          >
-            <h2 className="mb-2 text-base font-semibold text-[var(--sea-ink)]">
-              {title}
-            </h2>
-            <p className="m-0 text-sm text-[var(--sea-ink-soft)]">{desc}</p>
-          </article>
-        ))}
+      {/* TRUST BAR */}
+      <section className="mb-1 border border-black container-narrow">
+        <div className="container-narrow grid grid-cols-2 gap-6 py-8 text-center md:grid-cols-4">
+           {t.trustbar.items.map(({ iconKey, label }) => {
+           const Icon = homeIconMap[iconKey];
+           return (
+		     <div key={label} className="flex items-center justify-center gap-2 text-sm font-medium text-foreground/80">
+             <Icon className="h-4 w-4 text-primary" /> {label}
+             </div> );
+		  })}
+        </div>
       </section>
 
-      <section className="island-shell mt-8 rounded-2xl p-6">
-        <p className="island-kicker mb-2">Quick Start</p>
-        <ul className="m-0 list-disc space-y-2 pl-5 text-sm text-[var(--sea-ink-soft)]">
-          <li>
-            Edit <code>src/routes/index.tsx</code> to customize the home page.
-          </li>
-          <li>
-            Update <code>src/components/Header.tsx</code> and{' '}
-            <code>src/components/Footer.tsx</code> for brand links.
-          </li>
-          <li>
-            Add routes in <code>src/routes</code> and tweak visual tokens in{' '}
-            <code>src/styles.css</code>.
-          </li>
-        </ul>
+      {/* POURQUOI */}
+      <section className={`mb-1 border border-black ${sectionStyle}`}>
+        <div className={`${texteSectionStyle}`}>
+          <p className={`${siteStyle.titreSectionBlancStyle}`}>{t.pourquoi.title}</p>
+          <h2 className={`${siteStyle.ligne1SectionBlancStyle}`}>
+            {t.pourquoi.primary}
+          </h2>
+          <p className={`pl-2 ${siteStyle.ligne2SectionBlancStyle}`}>{t.pourquoi.secondary}</p>
+        </div>
+
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+		  {t.pourquoi.cartes.map(({ iconKey, title, text }) => {
+           const Icon = homeIconMap[iconKey];
+           return (
+		    <div key={title} className="rounded-2xl border border-black bg-card p-6 shadow-soft transition hover:-translate-y-0.5 hover:border-primary/30">
+              <div className="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
+                <Icon className="h-5 w-5" />
+              </div>
+              <h3 className={`${siteStyle.titreVignetteStyle}`}>{title}</h3>
+              <p className={`${siteStyle.ligne1VignetteStyle}`}>{text}</p>
+            </div> );
+		  })}
+        </div>
       </section>
+      
+      {/* PROCESSUS */}
+      <section className={`mb-1 border border-black ${sectionStyle}`}>
+        <div className={`${texteSectionStyle}`}>
+          <p className={`${siteStyle.titreSectionBlancStyle}`}>{t.processus.title}</p>
+          <h2 className={`${siteStyle.ligne1SectionBlancStyle}`}>{t.processus.primary}</h2>
+        </div>
+
+        <div className="relative mt-12 flex flex-col gap-8 md:flex-row md:items-stretch">
+		  {t.processus.cartes.map((step,i) => (
+            <div key={step.num} className="relative flex-1">
+              <div className="rounded-2xl border border-black bg-card p-6 shadow-soft">
+                <div className="flex items-center gap-3">
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-primary text-primary-foreground text-sm font-bold">
+                    {step.num}
+                  </span>
+                  <h3 className={`${siteStyle.titreVignetteStyle}`}>{step.title}</h3>
+                </div>
+                <p className={`${siteStyle.ligne1VignetteStyle}`}>{step.text}</p>
+              </div>
+              {i < t.processus.cartes.length -1 && (
+                <ArrowRight className="absolute -right-7 top-1/2 hidden h-6 w-6 -translate-y-1/2 text-black md:block" />
+              )}
+            </div>
+		  ))}
+        </div>
+      </section>
+     
+      {/* REALISATIONS */}
+	  <section className={`mb-1 border border-black ${sectionStyle}`}>
+	    <div className={`${texteSectionStyle}`}>
+            <p className={`${siteStyle.titreSectionBlancStyle}`}>{t.realisations.title}</p>
+            <h2 className={`${siteStyle.ligne1SectionBlancStyle}`}>{t.realisations.primary}</h2>
+        </div>
+        
+		<div className="relative mt-12 grid gap-8 md:grid-cols-3">
+         {t.realisations.cartes.map((p) => {
+           // Récupère l'image correspondante depuis le mapping
+           const imgSrc = realisationsImages[p.srcKey];
+		   // Vérifie que l'image existe (fallback si nécessaire)
+           if (!imgSrc) {
+            console.warn(`Image non trouvée pour la clé : ${p.srcKey}`);
+            return null;
+           }
+           return (
+		    <figure key={p.title} className={`group relative overflow-hidden rounded-2xl border border-black`} >
+              <img src={imgSrc} alt={p.title} className="aspect-square w-full object-cover transition duration-500 group-hover:scale-105" />
+              <figcaption className="absolute inset-x-3 bottom-3 rounded-xl bg-background/95 px-3 py-2 text-xs">
+                <p className="font-semibold">{p.title}</p>
+                <p className="text-muted-foreground">{p.location}</p>
+              </figcaption>
+            </figure> );
+		  })}
+        </div>
+      </section>
+
+      {/* TEMOIGNAGES */}
+      <section className={`mb-1 border border-black ${sectionStyle}`}>
+		  <div className={`${texteSectionStyle}`}>
+            <p className={`${siteStyle.titreSectionBlancStyle}`}>{t.temoignages.title}</p>
+            <h2 className={`${siteStyle.ligne1SectionBlancStyle}`}>{t.temoignages.primary}</h2>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {t.temoignages.cartes.map((item) => (
+              <article key={item.name} className="flex flex-col rounded-2xl border border-black bg-card p-6 shadow-soft">
+                {/* Étoiles (5 étoiles pleines) */}
+				<div className="flex items-center gap-1 text-accent">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-current" />
+                  ))}
+                </div>
+				{/* Texte du témoignage */}
+                <p className={`${siteStyle.ligne1VignetteStyle}`}>"{item.text}”</p>
+		        <div className="mt-auto flex items-end gap-3">
+                  <div>
+                    <p className={`${siteStyle.ligne1VignetteStyle} font-semibold`}>{item.name}</p>
+                    <p className={`${siteStyle.ligne1VignetteStyle}`}>{item.date}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+      </section>
+
+      {/* FAQ */}
+      <section className={`mb-1 border border-black ${sectionStyle}`}>
+        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr]">
+          <div>
+            <p className={`pl-2 ${siteStyle.titreSectionBlancStyle}`}>{t.faq.title}</p>
+            <h2 className={`pl-2 ${siteStyle.ligne1SectionBlancStyle}`}>{t.faq.primary}</h2>
+			      <p className={`pl-2 ${siteStyle.ligne2SectionBlancStyle}`}>{t.faq.secondary}</p>
+		      </div>
+
+          <Accordion type="single" collapsible className="w-full">
+            {t.faq.questions.map((faqItem, index) => (
+              <AccordionItem key={faqItem.question} value={`item-${index}`} className="border-border">
+                <AccordionTrigger className="text-left text-base font-semibold hover:no-underline">{faqItem.question}</AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground">{faqItem.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      <CtaBand />
     </main>
-  )
+  );
 }

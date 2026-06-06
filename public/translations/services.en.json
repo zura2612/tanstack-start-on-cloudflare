@@ -1,0 +1,52 @@
+{
+  "hero": {
+    "primary": "Comprehensive expertise for every need.",
+    "secondary": "From simple repairs to full renovations, we put all our know-how at the service of your comfort and safety."
+  },
+  "services": {
+    "cartes": [
+      {
+        "iconKey": "Zap",
+        "title": "New Installation",
+        "text": "Complete wiring for new builds, extensions, or expansions, compliant with NF C 15-100 standards.",
+        "bouton": "Request a free quote"
+      },
+      {
+        "iconKey": "Wrench",
+        "title": "Electrical Renovation",
+        "text": "Upgrading old systems, panel replacement, and circuit securing.",
+        "bouton": "Request a free quote"
+      },
+      {
+        "iconKey": "PlugZap",
+        "title": "24/7 Troubleshooting",
+        "text": "Rapid intervention for outages, short circuits, or faulty panels.",
+        "bouton": "Request a free quote"
+      },
+      {
+        "iconKey": "Home",
+        "title": "Smart Home & Home Automation",
+        "text": "Shutters, heating, alarms, and automated scenarios for a more comfortable home.",
+        "bouton": "Request a free quote"
+      },
+      {
+        "iconKey": "Zap",
+        "title": "Video Surveillance",
+        "text": "Protect your spaces with a modern video surveillance system accessible remotely.",
+        "bouton": "Request a free quote"
+      },
+      {
+        "iconKey": "Zap",
+        "title": "Air Conditioning",
+        "text": "Cool air in summer, gentle heat in winter: opt for efficient climate control.",
+        "bouton": "Request a free quote"
+      },
+      {
+        "iconKey": "BatteryCharging",
+        "title": "EV Charging Stations",
+        "text": "Power your electric vehicle with a convenient charging station tailored to your needs.",
+        "bouton": "Request a free quote"
+      }
+    ]
+  }
+}
