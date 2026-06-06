@@ -8,5 +8,4 @@
   "files.readonlyInclude": {
     "**/routeTree.gen.ts": true
   }
-  "files.eol": "\n"
 }
