@@ -18,6 +18,7 @@
     "noEmit": true,
 
     /* Linting */
+    "baseUrl": ".",
     "skipLibCheck": true,
     "strict": true,
     "noUnusedLocals": true,
